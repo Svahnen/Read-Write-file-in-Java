@@ -9,17 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Persons {
+    List<String> data = new ArrayList<>();
     List<String> personList = new ArrayList<>();
+    List<String> infoList = new ArrayList<>();
+    boolean even = true;
 
     public Persons() throws Exception {
         readFile();
-        if (personList.size() > 0) {
-            // TODO: Code here
-        } else {
-            throw new Exception("List is empty"); // Currently no error handling for wrong format
+        for (String line : data) {
+            System.out.println(line);
+            if (even) {
+                personList.add(line);
+                even = false;
+            } else {
+                infoList.add(line);
+                even = true;
+            }
         }
-        for (String person : personList) {
-            System.out.println(person);
+        for (String line : personList) {
+            System.out.println(line);
+        }
+        for (String line : infoList) {
+            System.out.println(line);
         }
         writeFile();
     }
@@ -28,7 +39,7 @@ public class Persons {
         String line;
         try (BufferedReader bufIn = new BufferedReader(new FileReader("persons.txt"));) {
             while ((line = bufIn.readLine()) != null) {
-                personList.add(line);
+                data.add(line);
             }
         } catch (Exception e) {
             System.out.println("File could not be found");
