@@ -3,7 +3,7 @@ public class Main {
         try {
             Persons thePersons = new Persons();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }
