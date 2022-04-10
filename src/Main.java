@@ -1,6 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        InputScanner input1 = new InputScanner();
+        try {
+            Persons thePersons = new Persons();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
