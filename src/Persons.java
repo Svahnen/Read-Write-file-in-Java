@@ -13,9 +13,11 @@ public class Persons {
     List<String> personList = new ArrayList<>();
     List<String> infoList = new ArrayList<>();
     boolean even = true;
+    Path myPath = Paths.get("longPersons.txt");
 
     public Persons() throws Exception {
         readFile();
+        // data = Files.readAllLines(myPath);
         for (String line : data) {
             System.out.println(line);
             if (even) {
@@ -47,11 +49,24 @@ public class Persons {
     }
 
     public void writeFile() {
-        Path myPath = Paths.get("longPersons.txt");
-        PrintWriter w;
         try {
-            w = new PrintWriter(Files.newBufferedWriter(myPath));
-            w.print("test");
+            Files.createFile(myPath);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        try (PrintWriter w = new PrintWriter(Files.newBufferedWriter(myPath));) {
+
+            for (int i = 0; i < infoList.size(); i++) {
+                String[] parts = infoList.get(i).split(", ");
+                int length = Integer.parseInt(parts[2]);
+                System.out.println(length);
+                if (length > 200) {
+                    w.println(personList.get(i));
+                    w.println(infoList.get(i));
+                    System.out.println(personList.get(i));
+                    System.out.println(infoList.get(i));
+                }
+            }
             w.close();
         } catch (IOException e) {
             e.printStackTrace();
